@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { SafeAreaView, StatusBar, StyleSheet, Alert, View, ActivityIndicator } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useEffect, useState } from 'react';
+import { ActivityIndicator, Alert, SafeAreaView, StatusBar, StyleSheet, View } from 'react-native';
 
 import { TaskService } from './src/services/TaskService';
 import { COLORS } from './src/styles/theme';
 
-import LoginScreen from './src/screens/LoginScreen';
-import TaskListScreen from './src/screens/TaskListScreen';
 import CreateTaskScreen from './src/screens/CreateTaskScreen';
 import EditTaskScreen from './src/screens/EditTaskScreen';
+import LoginScreen from './src/screens/LoginScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
+import TaskListScreen from './src/screens/TaskListScreen';
 
 const ALL_USERS_STORAGE_KEY = '@FocoTotal:allUsers';
 
 const SplashScreen = () => (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: COLORS.background}}>
+    <View style={styles.splashContainer}>
         <ActivityIndicator size="large" color={COLORS.primary} />
     </View>
 );
@@ -78,12 +78,12 @@ export default function App() {
             user => user.name.toLowerCase() === loginData.name.toLowerCase().trim()
         );
 
-        if (foundUser) {
+        if (foundUser && foundUser.password === loginData.password) {
             setUserData(foundUser);
             refreshTasks(foundUser.name);
             setScreen('TaskList');
         } else {
-            Alert.alert("Erro de Login", "O nome do perfil está incorreto.");
+            Alert.alert("Erro de Login", "O nome do perfil ou a senha estão incorretos.");
         }
       } catch (e) {
           Alert.alert("Erro", "Não foi possível entrar.");
@@ -165,5 +165,14 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  root: { flex: 1, backgroundColor: '#F4F6FA' },
+  root: {
+    flex: 1,
+    backgroundColor: '#F4F6FA',
+  },
+  splashContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLORS.background,
+  },
 });

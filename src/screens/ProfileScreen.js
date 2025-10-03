@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, Alert } from 'react-native';
+import { useState } from 'react';
+import { Alert, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { COLORS, SIZES } from '../styles/theme';
 
 export default function ProfileScreen({ onNavigate, onLogout, userData, onUpdateProfile }) {
@@ -62,20 +62,80 @@ export default function ProfileScreen({ onNavigate, onLogout, userData, onUpdate
 };
 
 const styles = StyleSheet.create({
-    container: { flex: 1, backgroundColor: COLORS.background, alignItems: 'center', justifyContent: 'center', padding: 20 },
-    
-    profileAvatar: { fontSize: 100, marginBottom: 20 },
-    header: { fontSize: SIZES.h1, fontWeight: 'bold', color: COLORS.text, marginBottom: 10 },
-    subHeader: { fontSize: 16, color: COLORS.textSecondary, marginBottom: 40, textAlign: 'center' },
-    buttonContainer: { width: '100%', position: 'absolute', bottom: 40, paddingHorizontal: 20 },
-    
-    editContainer: { width: '100%', alignItems: 'center' },
-    formHeader: { fontSize: SIZES.h2, fontWeight: '600', color: COLORS.text, marginBottom: 20 },
-    avatarInput: { fontSize: 60, width: 120, height: 120, textAlign: 'center', backgroundColor: COLORS.white, borderRadius: 20, borderColor: COLORS.primary, borderWidth: 2, marginBottom: 30 },
-    
-    button: { width: '100%', backgroundColor: COLORS.primary, padding: 16, borderRadius: 12, alignItems: 'center', marginTop: 10 },
-    buttonText: { color: COLORS.white, fontWeight: 'bold', fontSize: 16 },
-    buttonOutline: { backgroundColor: 'transparent', borderWidth: 1, borderColor: COLORS.primary },
-    buttonOutlineText: { color: COLORS.primary, fontWeight: 'bold', fontSize: 16 },
-    logoutButton: { backgroundColor: COLORS.danger },
+    container: {
+      flex: 1,
+      backgroundColor: COLORS.background,
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 20,
+    },
+    profileAvatar: {
+      fontSize: 100,
+      marginBottom: 20,
+    },
+    header: {
+      fontSize: SIZES.h1,
+      fontWeight: 'bold',
+      color: COLORS.text,
+      marginBottom: 10,
+    },
+    subHeader: {
+      fontSize: 16,
+      color: COLORS.textSecondary,
+      marginBottom: 40,
+      textAlign: 'center',
+    },
+    buttonContainer: {
+      width: '100%',
+      position: 'absolute',
+      bottom: 40,
+      paddingHorizontal: 20,
+    },
+    editContainer: {
+      width: '100%',
+      alignItems: 'center',
+    },
+    formHeader: {
+      fontSize: SIZES.h2,
+      fontWeight: '600',
+      color: COLORS.text,
+      marginBottom: 20,
+    },
+    avatarInput: {
+      fontSize: 60,
+      width: 120,
+      height: 120,
+      textAlign: 'center',
+      backgroundColor: COLORS.white,
+      borderRadius: 20,
+      borderColor: COLORS.primary,
+      borderWidth: 2,
+      marginBottom: 30,
+    },
+    button: {
+      width: '100%',
+      backgroundColor: COLORS.primary,
+      padding: 16,
+      borderRadius: 12,
+      alignItems: 'center',
+      marginTop: 10,
+    },
+    buttonText: {
+      color: COLORS.white,
+      fontWeight: 'bold',
+      fontSize: 16,
+    },
+    buttonOutline: {
+      backgroundColor: 'transparent',
+      borderWidth: 1,
+      borderColor: COLORS.primary,
+    },
+    buttonOutlineText: {
+      color: COLORS.primary,
+      fontWeight: 'bold',
+      fontSize: 16,
+    },
+    logoutButton: {
+      backgroundColor: COLORS.danger,
+    },
 });

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform, Alert } from 'react-native';
+import { useState } from 'react';
+import { Alert, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
+import { COLORS, SIZES } from '../styles/theme';
 
 export default function EditTaskScreen({ onNavigate, onEditTask, onDeleteTask, editingTask }) {
   const [title, setTitle] = useState(editingTask.title);
@@ -19,11 +20,18 @@ export default function EditTaskScreen({ onNavigate, onEditTask, onDeleteTask, e
           "Excluir Tarefa",
           "Você tem certeza que deseja excluir esta tarefa?",
           [
-              { text: "Cancelar", style: "cancel" },
-              { text: "Excluir", style: "destructive", onPress: () => {
-                  onDeleteTask(editingTask.id);
+              {
+                text: "Cancelar",
+                style: "cancel"
+              },
+              {
+                text: "Excluir",
+                style: "destructive",
+                onPress: async () => {
+                  await onDeleteTask(editingTask.id);
                   onNavigate('TaskList');
-              }}
+                }
+              }
           ]
       );
   }
@@ -31,8 +39,19 @@ export default function EditTaskScreen({ onNavigate, onEditTask, onDeleteTask, e
   return (
     <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.container}>
       <Text style={styles.header}>Editar Tarefa</Text>
-      <TextInput placeholder="Título da tarefa" style={styles.input} value={title} onChangeText={setTitle} />
-      <TextInput placeholder="Descrição (opcional)" style={[styles.input, styles.multilineInput]} value={description} onChangeText={setDescription} multiline />
+      <TextInput
+        placeholder="Título da tarefa"
+        style={styles.input}
+        value={title}
+        onChangeText={setTitle}
+      />
+      <TextInput
+        placeholder="Descrição (opcional)"
+        style={[styles.input, styles.multilineInput]}
+        value={description}
+        onChangeText={setDescription}
+        multiline
+      />
       <TouchableOpacity style={styles.button} onPress={handleSave}>
         <Text style={styles.buttonText}>Salvar Alterações</Text>
       </TouchableOpacity>
@@ -47,13 +66,58 @@ export default function EditTaskScreen({ onNavigate, onEditTask, onDeleteTask, e
 };
 
 const styles = StyleSheet.create({
-    container: { flex: 1, backgroundColor: '#f5f5f5', alignItems: 'center', justifyContent: 'center', padding: 20 },
-    header: { fontSize: 32, fontWeight: 'bold', color: '#333', marginBottom: 10 },
-    input: { width: '100%', backgroundColor: '#fff', paddingVertical: 15, paddingHorizontal: 20, borderRadius: 12, marginBottom: 15, fontSize: 16, borderWidth: 1, borderColor: '#ddd' },
-    multilineInput: { height: 100, textAlignVertical: 'top' },
-    button: { width: '100%', backgroundColor: '#007AFF', padding: 16, borderRadius: 12, alignItems: 'center', marginTop: 10 },
-    buttonText: { color: '#fff', fontWeight: 'bold', fontSize: 16 },
-    buttonOutline: { backgroundColor: 'transparent', borderWidth: 1, borderColor: '#007AFF' },
-    buttonOutlineText: { color: '#007AFF', fontWeight: 'bold', fontSize: 16 },
-    deleteButton: { backgroundColor: '#E53935' },
+    container: {
+      flex: 1,
+      backgroundColor: COLORS.background,
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 20,
+    },
+    header: {
+      fontSize: SIZES.h2,
+      fontWeight: 'bold',
+      color: COLORS.text,
+      marginBottom: 30,
+    },
+    input: {
+      width: '100%',
+      backgroundColor: COLORS.white,
+      paddingVertical: 15,
+      paddingHorizontal: 20,
+      borderRadius: 12,
+      marginBottom: 15,
+      fontSize: 16,
+      borderWidth: 1,
+      borderColor: COLORS.lightGray,
+    },
+    multilineInput: {
+      height: 100,
+      textAlignVertical: 'top',
+    },
+    button: {
+      width: '100%',
+      backgroundColor: COLORS.primary,
+      padding: 16,
+      borderRadius: 12,
+      alignItems: 'center',
+      marginTop: 10,
+    },
+    buttonText: {
+      color: COLORS.white,
+      fontWeight: 'bold',
+      fontSize: 16,
+    },
+    buttonOutline: {
+      backgroundColor: 'transparent',
+      borderWidth: 1,
+      borderColor: COLORS.primary,
+    },
+    buttonOutlineText: {
+      color: COLORS.primary,
+      fontWeight: 'bold',
+      fontSize: 16,
+    },
+    deleteButton: {
+      backgroundColor: COLORS.danger,
+    },
 });
